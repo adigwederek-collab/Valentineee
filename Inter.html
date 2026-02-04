@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>opeyemi, will you be my valentine? 💖</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+    }
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      text-align: center;
+      max-width: 380px;
+      width: 90%;
+      position: relative;
+      overflow: hidden;
+    }
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 10px;
+      text-transform: lowercase;
+    }
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+      margin-top: 10px;
+    }
+    button {
+      padding: 12px 26px;
+      font-size: 16px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    #yes {
+      background: #ff4d6d;
+      color: white;
+    }
+    #no {
+      background: #eee;
+      color: #666;
+      font-size: 12px;
+      text-transform: lowercase;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    .heart {
+      font-size: 46px;
+      animation: pulse 1s infinite;
+      margin-bottom: 6px;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    .warning {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      white-space: nowrap;
+      cursor: default;
+      transition: transform 0.1s linear;
+    }
+    .pls {
+      font-size: 10px;
+      opacity: 0;
+      animation: plsFade 2.5s infinite;
+      margin-top: 2px;
+    }
+    @keyframes plsFade {
+      0%, 40% { opacity: 0; }
+      60%, 80% { opacity: 0.6; }
+      100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card" id="card">
+    <div class="heart">❤️</div>
+    <h1>opeyemi… will you be my valentine?</h1>
+    <p>be honest, you already know the answer 😌</p>
+    <div class="warning" id="warning">(you can't click no 😡)</div>
+    <div class="pls">pls</div>
+    <div class="buttons">
+      <button id="yes">yes 💕</button>
+      <button id="no">no</button>
+    </div>
+  </div>  <script>
+    const warning = document.getElementById('warning');
+    const card = document.getElementById('card');
+    const yesBtn = document.getElementById('yes');
+
+    // Make warning text run away
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      const warningRect = warning.getBoundingClientRect();
+      const warningX = warningRect.left - rect.left + warningRect.width / 2;
+      const warningY = warningRect.top - rect.top + warningRect.height / 2;
+
+      const dx = mouseX - warningX;
+      const dy = mouseY - warningY;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+
+      if(dist < 50) {
+        const moveX = (Math.random() * 100 - 50);
+        const moveY = (Math.random() * 30 - 15);
+        warning.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      }
+    });
+
+    yesBtn.addEventListener('click', () => {
+      card.innerHTML = `
+        <div class="heart">💘</div>
+        <h1>yessss 😭❤️</h1>
+        <p>happy valentine's day, opeyemi.</p>
+      `;
+    });
+  </script></body>
+  </html>
